@@ -5,7 +5,9 @@ using UnityEngine;
 public class Scenario{
 	public int width;
 	public int height;
-	public List<GameObject> Walls;
+	public GameObject player;
+	public List<GameObject> Walls = new List<GameObject>();
+	public List<GameObject> People = new List<GameObject>();
 
 	// people
 }
