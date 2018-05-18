@@ -6,9 +6,13 @@ using System;
 
 public class ScenarioReader : MonoBehaviour{
 
-	public Transform wallObject;
-	public Transform floorObject;
-	public Transform humanObject;
+	public GameObject wallObject;
+	public GameObject floorObject;
+	public GameObject humanObject;
+
+	GameObject makeObject(GameObject toadd, int i, int j){
+		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
+	}
 
 	public bool readScenario(string filename, Scenario scenario){
 		StreamReader reader = new StreamReader(filename);
@@ -19,39 +23,37 @@ public class ScenarioReader : MonoBehaviour{
 
 			string line = reader.ReadLine();
 			for (int j = 0; j < line.Length; j++) {
-				if (line [j] == '.') { // floor
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
+				GameObject toadda = floorObject; // floor exists by default
+				switch (line [j]) {
+				case('.'):
+					// just floor
+					break;
+				case('#'):
+					GameObject newWall = makeObject (wallObject, i, j);
+					scenario.Walls.Add (newWall);
+					break;
+				case('P'):
+					scenario.player = makeObject (humanObject, i, j);
+					break;
+				case('A'):
+				case('F'):
+				case('J'):
+				case('S'):
+				case('B'):
+					scenario.People.Add(makeObject(humanObject,i,j));
+					break;
+				default:
+					// should not be here...
+					break;
 				}
-				if (line [j] == '#') { // wall
-					GameObject.Instantiate(wallObject, new Vector3(i,0,j), Quaternion.identity);
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
+					
+				if (toadda) {
+					GameObject.Instantiate(toadda, new Vector3(i,0,j), Quaternion.identity);
 				}
-				if (line [j] == 'A') { // angry
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-				}
-				if (line [j] == 'F') { // fear
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-				}
-				if (line [j] == 'J') { // joy
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-				}
-				if (line [j] == 'S') { // sad
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-				}
-				if (line [j] == 'P') {// player
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-				}
-				if (line [j] == 'B') {// unfeeling
-					GameObject.Instantiate(floorObject, new Vector3(i,-0.1f,j), Quaternion.identity);
-					GameObject.Instantiate(humanObject, new Vector3(i,0,j), Quaternion.identity);
-				}
+	
 			}
 		}
 		return true;
 	}
+
 }
