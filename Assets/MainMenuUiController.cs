@@ -13,7 +13,7 @@ public class MainMenuUiController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gameState = GameObject.Find("GameMaster").GetComponent<GameState>();
+        gameState = GameObject.Find("GameState").GetComponent<GameState>();
 
         StartGameButton = GameObject.Find("StartButton").GetComponent<Button>();
         LevelSelectionButton = GameObject.Find("LevelSelectionButton").GetComponent<Button>();
