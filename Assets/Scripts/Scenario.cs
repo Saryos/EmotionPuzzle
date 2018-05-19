@@ -25,7 +25,7 @@ public class Scenario : MonoBehaviour {
     private bool justChangedEmotion = false;
 
 	void Start() {
-		player = playerO.GetComponent<PlayerController>();
+
 	}
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -153,6 +153,7 @@ public class Scenario : MonoBehaviour {
 
 	public void createPlayer(int i, int j){
 		playerO = makeObject (playerObject, i, j);
+		player = playerO.GetComponent<PlayerController>();
 		(playerO.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
 	}
 

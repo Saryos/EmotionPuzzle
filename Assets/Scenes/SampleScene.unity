@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 702651041}
   - component: {fileID: 702651043}
   - component: {fileID: 702651044}
+  - component: {fileID: 702651045}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -350,3 +351,15 @@ MonoBehaviour:
   Walls: []
   People: []
   Floors: []
+--- !u!114 &702651045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702651040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c90d5d00cced44da7563de712a840f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 702651041}
