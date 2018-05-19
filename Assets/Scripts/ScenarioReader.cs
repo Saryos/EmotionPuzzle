@@ -37,10 +37,18 @@ public class ScenarioReader : MonoBehaviour{
 					scenario.createGoal (i, j);
 					break;
 				case('A'):
-				case('F'):
-				case('J'):
-				case('S'):
-				case('B'):
+                    scenario.createPeople (i, j, line[j]);
+                    break;
+                case ('F'):
+                    scenario.createPeople(i, j, line[j]);
+                    break;
+                case ('J'):
+                    scenario.createPeople (i, j, line[j]);
+                    break;
+                case ('S'):
+                    scenario.createPeople (i, j, line[j]);
+                    break;
+                case ('B'):
 					scenario.createPeople (i, j, line[j]);
 					break;
 				default:

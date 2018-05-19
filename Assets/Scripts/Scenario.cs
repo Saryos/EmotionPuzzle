@@ -14,12 +14,19 @@ public class Scenario : MonoBehaviour {
 
 	public int width;
 	public int height;
-	public GameObject player;
+	public GameObject playerO;
+	public PlayerController player;
+
 	// Should all objects be on the same list?
 	public List<GameObject> Walls = new List<GameObject>(); // Normal objects
 	public List<GameObject> People = new List<GameObject>(); // possible actors
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
 
+    private bool justChangedEmotion = false;
+
+	void Start() {
+		player = playerO.GetComponent<PlayerController>();
+	}
 
 	GameObject makeObject(GameObject toadd, int i, int j){
 		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
@@ -36,20 +43,10 @@ public class Scenario : MonoBehaviour {
 		}
 		return false;
 	}
-
-	public int Destroy(int i, int j){
-		for(int k=0;k<Walls.Count;k++){
-			GameObject item = Walls [k];
-			if (isInSquare (item, i, j)) {
-				if (item.GetComponent<Cake> ()) {
-					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
-				}
-				Walls.Remove(item);
-				Destroy(item);
-				return 1;
-			}
-		}
-		return 0;
+	 
+	public void myDestroy(GameObject item){
+		Walls.Remove(item);
+		Destroy(item);
 	}
 
 	public int isPassable(int i, int j){
@@ -64,8 +61,73 @@ public class Scenario : MonoBehaviour {
 				return 0;
 			}
 		}
-		return 1;
+		foreach(GameObject item in Floors){
+			if (isInSquare (item, i, j)) {
+				return 1;
+			}
+		}
+		return 0;
 	}
+
+	public void Act(int x, int z){
+		for(int k=0;k<Walls.Count;k++){
+			GameObject item = Walls [k];
+			if (isInSquare (item, x, z)) {
+				//Debug.Log ("Act");
+				if (item.GetComponent<Cake> ()) {
+					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
+				}
+				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
+					Debug.Log ("Weak wall destroyed");
+					player.destroys--;
+					myDestroy (item);
+				}
+            }
+		}
+        for (int k = 0; k < People.Count; k++)
+        {
+            GameObject item = People[k];
+            if (isInSquare(item, x, z))
+            {
+                if (item.GetComponent<Human>() && justChangedEmotion == false)
+                {
+                    Debug.Log("Human Collision");
+                    if (item.GetComponent<Human>().mood != 'B' && player.emotion == 'B' )
+                    {
+                        player.emotion = item.GetComponent<Human>().mood;
+                        item.GetComponent<Human>().mood = 'B';
+                        Debug.Log("Player Got emotion" + player.emotion);
+                        StartCoroutine(emotionHasChanged());
+                    }
+                    else if (item.GetComponent<Human>().mood == 'B' && player.emotion != 'B')
+                    {
+                        item.GetComponent<Human>().mood = player.emotion;
+                        player.emotion = 'B';
+                        Debug.Log("Player used emotion" + player.emotion);
+                        StartCoroutine(emotionHasChanged());
+                    }
+                }
+            }
+        }
+        for (int k = 0; k < Floors.Count; k++) {
+			GameObject item = Floors [k];
+			if (isInSquare (item, x, z)) {
+				return; // floor ok
+				//Debug.Log ("Act");
+			}
+		}
+		if (player.builds > 0) {
+			createFloor (x, z);
+			player.builds--;
+		}
+
+	}
+
+    IEnumerator emotionHasChanged() {
+        justChangedEmotion = true;
+        yield return new WaitForSeconds(0.5f);
+        justChangedEmotion = false;
+    }
 
 	public void createPermaWall(int i, int j){
 		GameObject newWall = makeObject (permaWallObject, i, j);
@@ -80,7 +142,7 @@ public class Scenario : MonoBehaviour {
 	public void createPeople(int i, int j, char mood){
 		GameObject newHuman = makeObject (humanObject, i, j);
 		Human temp = newHuman.GetComponent<Human>();
-		temp.mood='B';
+		temp.mood=mood;
 		People.Add(newHuman);
 	}
 
@@ -90,11 +152,11 @@ public class Scenario : MonoBehaviour {
 	}
 
 	public void createPlayer(int i, int j){
-		player = makeObject (playerObject, i, j);
-		(player.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
+		playerO = makeObject (playerObject, i, j);
+		(playerO.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
 	}
 
 	public void createFloor(int i, int j){
-		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,0,j), Quaternion.identity));
+		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,-0.5f,j), Quaternion.identity));
 	}
 }
