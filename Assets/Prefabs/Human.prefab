@@ -215,6 +215,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4321962433207394}
   - component: {fileID: 95096463779151360}
+  - component: {fileID: 136157151421971356}
+  - component: {fileID: 54039710888431778}
+  - component: {fileID: 114124622187221986}
   m_Layer: 0
   m_Name: Human
   m_TagString: Untagged
@@ -345,7 +348,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1777083622906948}
   m_LocalRotation: {x: -0, y: 0.6039247, z: -0, w: 0.7970414}
-  m_LocalPosition: {x: 4.224, y: -2.026, z: 2.183}
+  m_LocalPosition: {x: 4.1563396, y: -1.451, z: 5.783668}
   m_LocalScale: {x: 0.157541, y: 0.15754104, z: 0.15754104}
   m_Children:
   - {fileID: 4542826829457648}
@@ -578,6 +581,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1899968453056820}
   m_Mesh: {fileID: 4300002, guid: 97711abf68174a746b07e9b38a76621e, type: 3}
+--- !u!54 &54039710888431778
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1777083622906948}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 72
+  m_CollisionDetection: 0
 --- !u!95 &95096463779151360
 Animator:
   serializedVersion: 3
@@ -596,6 +614,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114124622187221986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1777083622906948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b84912b563d014eaf38a821ac1196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mood: 0
+  speed: 1
+  turnSpeed: 0
+  attractionDistance: 1.25
+  basicMat: {fileID: 2100000, guid: be704ee7457b7ae429f36f05184ee353, type: 2}
+  sadMat: {fileID: 2100000, guid: 03699c15f67b3c14999e430df6ba6517, type: 2}
+  fearMat: {fileID: 2100000, guid: 8930fb6bcebb564438ee0b43305b5f0c, type: 2}
+  joyMat: {fileID: 2100000, guid: efb455b75b4ad114cb72fa99e8e62b97, type: 2}
+  angryMat: {fileID: 2100000, guid: 74febef60f45f7b4a8f70e15f5a75dca, type: 2}
+  moveUnlocked: 0
+--- !u!136 &136157151421971356
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1777083622906948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.8579776
+  m_Height: 6.924748
+  m_Direction: 1
+  m_Center: {x: 0.47283462, y: 2.962374, z: 0.67885894}
 --- !u!137 &137565654385157162
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
