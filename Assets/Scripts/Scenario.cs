@@ -77,7 +77,7 @@ public class Scenario : MonoBehaviour {
 		return 0;
 	}
 
-	public void Act(int x, int z){
+	public void Act(int x, int z, char direction){
 		for(int k=0;k<Walls.Count;k++){
 			GameObject item = Walls [k];
 			if (isInSquare (item, x, z)) {
@@ -101,7 +101,27 @@ public class Scenario : MonoBehaviour {
             if (isInSquare(item, x, z))
             {
 				if (item.GetComponent<Human> ().moveUnlocked) {
+					Debug.Log ("pushing");
 					// push
+					int x_=x;
+					int z_=z;
+					switch (direction) {
+					case('N'):
+						z_++;
+						break;
+					case('S'):
+						z_--;
+						break;
+					case('E'):
+						x_++;
+						break;
+					case('W'):
+						x_--;
+						break;
+					}
+					if(isPassable(x_, z_)==1){
+						item.transform.position=new Vector3(x_, 0, z_);
+					}
 				} else if (player.pushes > 0) {
 					player.pushes--;
 					item.GetComponent<Human> ().moveUnlocked=true;
