@@ -318,15 +318,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb722cd078a467449a4e99a56c12701d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallObject: {fileID: 1340513179002842, guid: 8bbc07eba6c03814480fb354b3938813, type: 2}
+  permaWallObject: {fileID: 1340513179002842, guid: 8bbc07eba6c03814480fb354b3938813,
+    type: 2}
+  weakWallObject: {fileID: 1383902585196416, guid: 7ce3bc324e86f5a4981adf52c8a81f6d,
+    type: 2}
   floorObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
     type: 2}
   humanObject: {fileID: 1920806975168042, guid: 46b103a4b927f434ab874d5459e1bcdf,
     type: 2}
   playerObject: {fileID: 1899981824460694, guid: 2ecfc8b9d76461f488bee77b5e87f612,
     type: 2}
+  goalObject: {fileID: 1061123399052754, guid: 67a484163c0199842836a06e6e3125e3, type: 2}
+  bridgeObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
+    type: 2}
   width: 0
   height: 0
   player: {fileID: 0}
   Walls: []
   People: []
+  Floors: []

@@ -19,7 +19,9 @@ public class GameState : MonoBehaviour
     private string currentLevelName;
     private int currentLevelNumber = 0;
 
-    public List<int> AllLevels;
+    public List<int> AllLevels { get; set; }
+
+    public List<string> AllLevelPaths;
     public List<int> UnlockedLevels = new List<int> { 1 };
 
     private MasterScript master;
@@ -33,8 +35,33 @@ public class GameState : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        AllLevels = new List<int>() { 1 };
-        
+        AllLevels = new List<int>();
+        AllLevelPaths = new List<string>();
+        int counter = 0;
+        while (true)
+        {
+            counter++;
+            string path = string.Format("Assets/Levels/scene{0}.txt", counter);
+            try
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    AllLevelPaths.Add(path);
+                    AllLevels.Add(counter);
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                break;
+            }
+        }
+        foreach (var item in AllLevelPaths)
+        {
+            Debug.Log(item);
+
+        }
+
+
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
         SceneManager.LoadScene("MainMenu");
@@ -46,9 +73,8 @@ public class GameState : MonoBehaviour
 
         if (currentLevelName == "Game")
         {
-            master = GetComponent<MasterScript>();
-            // TODO Inform master what level needs to be loaded
-            // master.loadLevel(int currentLevelNumber)
+            master = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<MasterScript>();
+            master.StartGame(AllLevelPaths[currentLevelNumber - 1]);
         }
     }
 
@@ -56,6 +82,7 @@ public class GameState : MonoBehaviour
     {
         if (!AllLevels.Contains(level))
         {
+            Debug.Log(level);
             Debug.Log("No such level exist");
         }
         else if (UnlockedLevels.Contains(level))
