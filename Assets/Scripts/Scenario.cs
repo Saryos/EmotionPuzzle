@@ -11,6 +11,7 @@ public class Scenario : MonoBehaviour {
 	public GameObject playerObject;
 	public GameObject goalObject;
 	public GameObject bridgeObject;
+	public GameObject dogObject;
 	public GameObject wallExplosion;
 
 	public int width;
@@ -162,6 +163,11 @@ public class Scenario : MonoBehaviour {
 
 	public void createGoal(int i, int j){
 		GameObject newWall = makeObject (goalObject, i, j);
+		Walls.Add (newWall);
+	}
+
+	public void createDog(int i, int j){
+		GameObject newWall = makeObject (dogObject, i, j);
 		Walls.Add (newWall);
 	}
 

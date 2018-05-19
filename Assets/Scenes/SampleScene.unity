@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -319,6 +319,12 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 282840814}
+    - target: {fileID: 114340155696108784, guid: 218e7b4219a28604189f9cfa3c5709eb,
+        type: 2}
+      propertyPath: dogObject
+      value: 
+      objectReference: {fileID: 1356195851542232, guid: 91bba101916470540a21ce480b5ade88,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
   m_IsPrefabParent: 0

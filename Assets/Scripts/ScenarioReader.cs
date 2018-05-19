@@ -51,6 +51,9 @@ public class ScenarioReader : MonoBehaviour{
                 case ('B'):
 					scenario.createPeople (i, j, line[j]);
 					break;
+				case('D'):
+					scenario.createDog (i, j);
+					break;
 				default:
 					// should not be here...
 					break;
