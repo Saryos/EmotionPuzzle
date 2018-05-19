@@ -22,6 +22,8 @@ public class Human : MonoBehaviour {
     public Material joyMat;
     public Material angryMat;
 
+	public bool moveUnlocked = false;
+
 	Scenario scenario;
 
     private enum pointToBeAdded { BUILD, BREAK, DOG, PUSH}

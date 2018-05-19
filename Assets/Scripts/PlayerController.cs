@@ -11,15 +11,15 @@ public class PlayerController : MonoBehaviour {
 
 	// public for testing
 	public int destroys = 0;
-	public int runs = 0;
+	public int pushes = 0;
 	public int builds = 0;
 	public int shields = 0;
 
 	public void addDestroy(){
 		destroys++;
 	}
-	public void addRun(){
-		runs++;
+	public void addPush(){
+		pushes++;
 	}
 	public void addBuild(){
 		builds++;

@@ -100,6 +100,13 @@ public class Scenario : MonoBehaviour {
             GameObject item = People[k];
             if (isInSquare(item, x, z))
             {
+				if (item.GetComponent<Human> ().moveUnlocked) {
+					// push
+				} else if (player.pushes > 0) {
+					player.pushes--;
+					item.GetComponent<Human> ().moveUnlocked=true;
+				}
+
                 if (item.GetComponent<Human>() && justChangedEmotion == false)
                 {
                     Debug.Log("Human Collision");
