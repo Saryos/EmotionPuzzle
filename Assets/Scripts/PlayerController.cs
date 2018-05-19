@@ -51,22 +51,22 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log (scenario.isPassable (x + 1, z));
 			axx++;
 			moveHorizontal *= scenario.isPassable (axx, z);
-			scenario.Act (axx,z);
+			scenario.Act (axx,z,'E');
 		}
 		if (moveHorizontal < 0 && transform.position.x < x) {
 			axx--;
 			moveHorizontal *= scenario.isPassable (axx, z);
-			scenario.Act (axx,z);
+			scenario.Act (axx,z,'W');
 		}
 		if (moveVertical < 0 && transform.position.z < z) {
 			azz--;
 			moveVertical *= scenario.isPassable (x , azz);
-			scenario.Act (x,azz);
+			scenario.Act (x,azz,'S');
 		}
 		if (moveVertical > 0 && transform.position.z > z) {
 			azz++;
 			moveVertical *= scenario.isPassable (x , azz);
-			scenario.Act (x,azz);
+			scenario.Act (x,azz,'N');
 		}
 
 		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
