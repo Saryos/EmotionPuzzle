@@ -93,6 +93,14 @@ public class Scenario : MonoBehaviour {
 					player.destroys--;
 					myDestroy (item);
 				}
+				if (item.GetComponent<dogScript>() && player.shields > 0) {
+					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
+					Debug.Log ("Doge destroyed");
+					audioPlayer.clip = breakClip;
+					audioPlayer.Play();
+					player.shields--;
+					myDestroy (item);
+				}
             }
 		}
         for (int k = 0; k < People.Count; k++)
