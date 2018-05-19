@@ -33,6 +33,9 @@ public class ScenarioReader : MonoBehaviour{
 				case('P'):
 					scenario.createPlayer(i, j);
 					break;
+				case('G'):
+					scenario.createGoal (i, j);
+					break;
 				case('A'):
 				case('F'):
 				case('J'):
