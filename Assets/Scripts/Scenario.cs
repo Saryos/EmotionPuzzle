@@ -7,6 +7,7 @@ public class Scenario : MonoBehaviour {
 	public GameObject wallObject;
 	public GameObject floorObject;
 	public GameObject humanObject;
+	public GameObject playerObject;
 
 	public int width;
 	public int height;
@@ -66,7 +67,7 @@ public class Scenario : MonoBehaviour {
 	}
 
 	public void createPlayer(int i, int j){
-		player = makeObject (humanObject, i, j);
+		player = makeObject (playerObject, i, j);
 	}
 
 	public void createFloor(int i, int j){
