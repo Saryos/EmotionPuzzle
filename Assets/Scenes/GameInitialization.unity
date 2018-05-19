@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6f1a1920a24b6489a6ae07ab08757a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllLevelPaths: []
+  UnlockedLevels: 01000000
 --- !u!4 &345886085
 Transform:
   m_ObjectHideFlags: 0

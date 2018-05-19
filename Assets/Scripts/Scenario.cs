@@ -80,7 +80,7 @@ public class Scenario : MonoBehaviour {
 	public void createPeople(int i, int j, char mood){
 		GameObject newHuman = makeObject (humanObject, i, j);
 		Human temp = newHuman.GetComponent<Human>();
-		temp.mood='B';
+		temp.mood=mood;
 		People.Add(newHuman);
 	}
 
@@ -95,6 +95,6 @@ public class Scenario : MonoBehaviour {
 	}
 
 	public void createFloor(int i, int j){
-		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,0,j), Quaternion.identity));
+		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,-0.5f,j), Quaternion.identity));
 	}
 }

@@ -53,19 +53,19 @@ public class Human : MonoBehaviour {
         switch (mood)
         {
             case ('S'):
-                this.gameObject.GetComponent<MeshRenderer>().material = sadMat;
+                this.gameObject.GetComponentInChildren<MeshRenderer>().material = sadMat;
                 break;
             case ('F'):
-                this.gameObject.GetComponent<MeshRenderer>().material = fearMat;
+                this.gameObject.GetComponentInChildren<MeshRenderer>().material = fearMat;
                 break;
             case ('A'):
-                this.gameObject.GetComponent<MeshRenderer>().material = angryMat;
+                this.gameObject.GetComponentInChildren<MeshRenderer>().material = angryMat;
                 break;
             case ('J'):
-                this.gameObject.GetComponent<MeshRenderer>().material = joyMat;
+                this.gameObject.GetComponentInChildren<MeshRenderer>().material = joyMat;
                 break;
             case ('B'):
-                this.gameObject.GetComponent<MeshRenderer>().material = basicMat;
+                this.gameObject.GetComponentInChildren<MeshRenderer>().material = basicMat;
                 break;
         }
     }

@@ -840,16 +840,16 @@ MonoBehaviour:
     type: 2}
   floorObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
     type: 2}
-  humanObject: {fileID: 1920806975168042, guid: 46b103a4b927f434ab874d5459e1bcdf,
+  humanObject: {fileID: 1063247301687066, guid: 61c7de2d9bd606c4284263bc374cb583,
     type: 2}
-  playerObject: {fileID: 1899981824460694, guid: 2ecfc8b9d76461f488bee77b5e87f612,
+  playerObject: {fileID: 1254570596804650, guid: 534b48fe4abcb584d98796a18411fa1a,
     type: 2}
   goalObject: {fileID: 1061123399052754, guid: 67a484163c0199842836a06e6e3125e3, type: 2}
   bridgeObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
     type: 2}
   width: 0
   height: 0
-  player: {fileID: 1899981824460694, guid: 2ecfc8b9d76461f488bee77b5e87f612, type: 2}
+  player: {fileID: 1254570596804650, guid: 534b48fe4abcb584d98796a18411fa1a, type: 2}
   Walls: []
   People: []
   Floors: []
