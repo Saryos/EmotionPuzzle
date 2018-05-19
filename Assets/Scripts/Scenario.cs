@@ -41,6 +41,9 @@ public class Scenario : MonoBehaviour {
 		for(int k=0;k<Walls.Count;k++){
 			GameObject item = Walls [k];
 			if (isInSquare (item, i, j)) {
+				if (item.GetComponent<Cake> ()) {
+					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
+				}
 				Walls.Remove(item);
 				Destroy(item);
 				return 1;
