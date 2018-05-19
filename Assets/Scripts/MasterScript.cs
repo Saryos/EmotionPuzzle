@@ -15,7 +15,13 @@ public class MasterScript : MonoBehaviour {
 		mainCamera.position = new Vector3 (scenario.width / 2, 10, scenario.height / 2);
 		mainCamera.rotation = Quaternion.Euler(90,0,0);
 	}
-	
+
+	public void StartGame (string level){
+		myReader.readScenario (level, scenario);
+		mainCamera.position = new Vector3 (scenario.width / 2, 10, scenario.height / 2);
+		mainCamera.rotation = Quaternion.Euler (90, 0, 0);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		

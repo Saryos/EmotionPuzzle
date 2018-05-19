@@ -21,8 +21,9 @@ public class Scenario : MonoBehaviour {
 
 	public bool isPassable(int i, int j){
 		foreach(GameObject item in Walls){
-			int x = Mathf.RoundToInt (item.Transform.x);
+			int x = Mathf.RoundToInt (item.transform.position.x);
 		}
+		return true;
 	}
 
 	public void createWall(int i, int j){
