@@ -19,6 +19,11 @@ public class Scenario : MonoBehaviour {
 		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
 	}
 
+	public bool isPassable(int i, int j){
+		foreach(GameObject item in Walls){
+			int x = Mathf.RoundToInt (item.Transform.x);
+		}
+	}
 
 	public void createWall(int i, int j){
 		GameObject newWall = makeObject (wallObject, i, j);
