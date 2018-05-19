@@ -37,19 +37,22 @@ public class Scenario : MonoBehaviour {
 		return false;
 	}
 
-	public bool Destroy(int i, int j){
-		foreach(GameObject item in Walls){
+	public int Destroy(int i, int j){
+		for(int k=0;k<Walls.Count;k++){
+			GameObject item = Walls [k];
 			if (isInSquare (item, i, j)) {
-				Destroy (item);
-				return true;
+				Walls.Remove(item);
+				Destroy(item);
+				return 1;
 			}
 		}
-		return true;
+		return 0;
 	}
 
 	public int isPassable(int i, int j){
 		foreach(GameObject item in Walls){
 			if (isInSquare (item, i, j)) {
+				//item.GetComponent<Renderer>().material.color = new Color (1, 0, 0);
 				return 0;
 			}
 		}
