@@ -11,10 +11,22 @@ public class PlayerController : MonoBehaviour {
 
 	// public for testing
 	public int destroys = 0;
-	int runs = 0;
-	int builds = 0;
-	int shields = 0;
+	public int runs = 0;
+	public int builds = 0;
+	public int shields = 0;
 
+	public void addDestroy(){
+		destroys++;
+	}
+	public void addRun(){
+		runs++;
+	}
+	public void addBuild(){
+		builds++;
+	}
+	public void addShield(){
+		shields++;
+	}
 	// must be called at initialization
 	public void setScenario(Scenario s){
 		scenario = s;
@@ -30,31 +42,31 @@ public class PlayerController : MonoBehaviour {
 		int x = Mathf.RoundToInt (transform.position.x);
 		int z = Mathf.RoundToInt (transform.position.z);
 
+		int axx = x;
+//		int axz = z;
+//		int azx = x;
+		int azz = z;
 
 		if (moveHorizontal > 0 && transform.position.x > x) {
 			//Debug.Log (scenario.isPassable (x + 1, z));
-			moveHorizontal *= scenario.isPassable (x + 1, z);
-			if (destroys>0) {
-				destroys -= scenario.Destroy (x + 1, z);
-			}
+			axx++;
+			moveHorizontal *= scenario.isPassable (axx, z);
+			scenario.Act (axx,z);
 		}
 		if (moveHorizontal < 0 && transform.position.x < x) {
-			moveHorizontal *= scenario.isPassable (x - 1, z);
-			if (destroys>0) {
-				destroys -= scenario.Destroy (x -1, z);
-			}
+			axx--;
+			moveHorizontal *= scenario.isPassable (axx, z);
+			scenario.Act (axx,z);
 		}
 		if (moveVertical < 0 && transform.position.z < z) {
-			moveVertical *= scenario.isPassable (x , z-1);
-			if (destroys>0) {
-				destroys -= scenario.Destroy (x , z-1);
-			}
+			azz--;
+			moveVertical *= scenario.isPassable (x , azz);
+			scenario.Act (x,azz);
 		}
 		if (moveVertical > 0 && transform.position.z > z) {
-			moveVertical *= scenario.isPassable (x , z+1);
-			if (destroys>0) {
-				destroys -= scenario.Destroy (x , z+1);
-			}
+			azz++;
+			moveVertical *= scenario.isPassable (x , azz);
+			scenario.Act (x,azz);
 		}
 
 		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
