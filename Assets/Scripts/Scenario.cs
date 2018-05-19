@@ -11,6 +11,7 @@ public class Scenario : MonoBehaviour {
 	public int width;
 	public int height;
 	public GameObject player;
+	// Should all objects be on the same list?
 	public List<GameObject> Walls = new List<GameObject>();
 	public List<GameObject> People = new List<GameObject>();
 
@@ -19,9 +20,35 @@ public class Scenario : MonoBehaviour {
 		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
 	}
 
+	private bool isInSquare(GameObject item, int i, int j){
+		int x = Mathf.RoundToInt (item.transform.position.x);
+		int z = Mathf.RoundToInt (item.transform.position.z);
+		if (i == x && j == z) {
+			return true;
+		}
+		return false;
+	}
+
+	public bool Destroy(int i, int j){
+		foreach(GameObject item in Walls){
+			if (isInSquare (item, i, j)) {
+				Destroy (item);
+				return true;
+			}
+		}
+		return true;
+	}
+
 	public bool isPassable(int i, int j){
 		foreach(GameObject item in Walls){
-			int x = Mathf.RoundToInt (item.transform.position.x);
+			if (isInSquare (item, i, j)) {
+				return false;
+			}
+		}
+		foreach(GameObject item in People){
+			if (isInSquare (item, i, j)) {
+				return false;
+			}
 		}
 		return true;
 	}
