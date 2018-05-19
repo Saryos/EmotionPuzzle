@@ -48,19 +48,19 @@ public class UiManagerScript : MonoBehaviour {
         {
             case Actions.Run:
                 runningPoints += 1;
-                runningPointsText.text = string.Format("Running Points (Press 1): {0}", runningPoints);
+                runningPointsText.text = string.Format("Running Points: {0}", runningPoints);
                 break;
             case Actions.Shield:
                 dogPoints += 1;
-                dogPointsText.text = string.Format("Dog Points (Press 1): {0}", dogPoints);
+                dogPointsText.text = string.Format("Dog Points: {0}", dogPoints);
                 break;
             case Actions.Break:
                 breakPoints += 1;
-                breakPointsText.text = string.Format("Break Points (Press 1): {0}", breakPoints);
+                breakPointsText.text = string.Format("Break Points: {0}", breakPoints);
                 break;
             case Actions.Build:
                 bridgePoints += 1;
-                bridgePointsText.text = string.Format("Bridge Points (Press 1): {0}", bridgePoints);
+                bridgePointsText.text = string.Format("Bridge Points: {0}", bridgePoints);
                 break;
         }
     }
