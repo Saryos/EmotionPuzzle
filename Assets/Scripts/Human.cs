@@ -13,7 +13,6 @@ public class Human : MonoBehaviour {
     public float attractionDistance = 5;
     private float timer = 0.0f;
 
-    private GameObject[] otherHumans;
     private GameObject attractiveHuman;
     private bool attracted = false;
 
@@ -23,10 +22,15 @@ public class Human : MonoBehaviour {
     public Material joyMat;
     public Material angryMat;
 
+	Scenario scenario;
+
+	// must be called at initialization
+	public void setScenario(Scenario s){
+		scenario = s;
+	}
 
     void Start()
     {
-        otherHumans = GameObject.FindGameObjectsWithTag("Human");
     }
 
     void Update()
@@ -86,7 +90,7 @@ public class Human : MonoBehaviour {
 
     private void checkAttractiveHumans()
     {
-        foreach (var human in otherHumans)
+		foreach (var human in scenario.People)
         {
             if(human != this.gameObject)
             {

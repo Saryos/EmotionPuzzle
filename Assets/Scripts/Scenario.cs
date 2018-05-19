@@ -158,6 +158,7 @@ public class Scenario : MonoBehaviour {
 		GameObject newHuman = makeObject (humanObject, i, j);
 		Human temp = newHuman.GetComponent<Human>();
 		temp.mood=mood;
+		temp.setScenario(this);
 		People.Add(newHuman);
 	}
 
