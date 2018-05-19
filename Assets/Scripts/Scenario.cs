@@ -23,10 +23,15 @@ public class Scenario : MonoBehaviour {
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
 
     private bool justChangedEmotion = false;
+    private AudioSource audioPlayer;
+    public AudioClip breakClip;
+    public AudioClip dogClip;
+    public AudioClip buildClip;
+    public AudioClip speedClip;
 
-	void Start() {
-
-	}
+    void Start() {
+        audioPlayer = gameObject.GetComponent<AudioSource>();
+    }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
 		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
@@ -79,6 +84,8 @@ public class Scenario : MonoBehaviour {
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
 					Debug.Log ("Weak wall destroyed");
+                    audioPlayer.clip = breakClip;
+                    audioPlayer.Play();
 					player.destroys--;
 					myDestroy (item);
 				}

@@ -116,7 +116,12 @@ public class GameState : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(currentLevelName);
         if (Input.GetKeyDown(KeyCode.Home))
+        {
             UnlockedLevels = AllLevels;
+            SceneManager.LoadScene(currentLevelName);
+
+        }
+
     }
 
     public void StartGame()
