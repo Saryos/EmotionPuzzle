@@ -28,7 +28,10 @@ public class Scenario : MonoBehaviour {
 	private bool isInSquare(GameObject item, int i, int j){
 		int x = Mathf.RoundToInt (item.transform.position.x);
 		int z = Mathf.RoundToInt (item.transform.position.z);
+
 		if (i == x && j == z) {
+//			Debug.Log (i);
+//			Debug.Log (x);
 			return true;
 		}
 		return false;
@@ -44,18 +47,18 @@ public class Scenario : MonoBehaviour {
 		return true;
 	}
 
-	public bool isPassable(int i, int j){
+	public int isPassable(int i, int j){
 		foreach(GameObject item in Walls){
 			if (isInSquare (item, i, j)) {
-				return false;
+				return 0;
 			}
 		}
 		foreach(GameObject item in People){
 			if (isInSquare (item, i, j)) {
-				return false;
+				return 0;
 			}
 		}
-		return true;
+		return 1;
 	}
 
 	public void createPermaWall(int i, int j){
@@ -82,6 +85,7 @@ public class Scenario : MonoBehaviour {
 
 	public void createPlayer(int i, int j){
 		player = makeObject (playerObject, i, j);
+		(player.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
 	}
 
 	public void createFloor(int i, int j){
