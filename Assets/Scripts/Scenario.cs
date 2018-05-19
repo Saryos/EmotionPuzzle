@@ -13,6 +13,7 @@ public class Scenario : MonoBehaviour {
 	public GameObject bridgeObject;
 	public GameObject dogObject;
 	public GameObject wallExplosion;
+	GameObject waterObject;
 
 	public int width;
 	public int height;
@@ -23,6 +24,7 @@ public class Scenario : MonoBehaviour {
 	public List<GameObject> Walls = new List<GameObject>(); // Normal objects
 	public List<GameObject> People = new List<GameObject>(); // possible actors
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
+	public List<GameObject> Voids = new List<GameObject>(); // only graphics objects
 
     private bool justChangedEmotion = false;
     private AudioSource audioPlayer;
@@ -34,6 +36,7 @@ public class Scenario : MonoBehaviour {
     void Start() {
         audioPlayer = gameObject.GetComponent<AudioSource>();
 		wallExplosion = Resources.Load ("WallExplosion") as GameObject;
+		waterObject = Resources.Load ("Water") as GameObject;
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -215,5 +218,8 @@ public class Scenario : MonoBehaviour {
 
 	public void createFloor(int i, int j){
 		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,-0.5f,j), Quaternion.identity));
+	}
+	public void createWater(int i, int j){
+		Voids.Add(GameObject.Instantiate(waterObject, new Vector3(i,-0.5f,j), Quaternion.identity));
 	}
 }

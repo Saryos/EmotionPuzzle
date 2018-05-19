@@ -54,6 +54,10 @@ public class ScenarioReader : MonoBehaviour{
 				case('D'):
 					scenario.createDog (i, j);
 					break;
+				case('~'):
+					scenario.createWater (i, j);
+					toadda = false;
+					break;
 				default:
 					// should not be here...
 					break;
