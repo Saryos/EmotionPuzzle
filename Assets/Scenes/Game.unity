@@ -844,12 +844,13 @@ MonoBehaviour:
     type: 2}
   playerObject: {fileID: 1254570596804650, guid: 534b48fe4abcb584d98796a18411fa1a,
     type: 2}
-  goalObject: {fileID: 1296135914260668, guid: 5ddf79740db1e8842b4cc506b98089d8, type: 2}
+  goalObject: {fileID: 1886226423210732, guid: 5ddf79740db1e8842b4cc506b98089d8, type: 2}
   bridgeObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
     type: 2}
   width: 0
   height: 0
-  player: {fileID: 1254570596804650, guid: 534b48fe4abcb584d98796a18411fa1a, type: 2}
+  playerO: {fileID: 0}
+  player: {fileID: 0}
   Walls: []
   People: []
   Floors: []
