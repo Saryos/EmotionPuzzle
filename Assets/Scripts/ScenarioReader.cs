@@ -31,7 +31,7 @@ public class ScenarioReader : MonoBehaviour{
 				case('J'):
 				case('S'):
 				case('B'):
-					scenario.createPeople (i, j, 'B');
+					scenario.createPeople (i, j, line[j]);
 					break;
 				default:
 					// should not be here...

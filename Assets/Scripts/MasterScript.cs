@@ -11,7 +11,7 @@ public class MasterScript : MonoBehaviour {
 	void Start () {
 		//scenario = new(Scenario);
 		//myReader =  new(ScenarioReader);
-		myReader.readScenario ("scene1.txt", scenario);
+		myReader.readScenario ("Assets/Levels/scene1.txt", scenario);
 		mainCamera.position = new Vector3 (scenario.width / 2, 10, scenario.height / 2);
 		mainCamera.rotation = Quaternion.Euler(90,0,0);
 	}
