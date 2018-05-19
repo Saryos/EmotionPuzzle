@@ -348,6 +348,18 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1230451263}
+    - target: {fileID: 114340155696108784, guid: 218e7b4219a28604189f9cfa3c5709eb,
+        type: 2}
+      propertyPath: dogObject
+      value: 
+      objectReference: {fileID: 1356195851542232, guid: 91bba101916470540a21ce480b5ade88,
+        type: 2}
+    - target: {fileID: 114340155696108784, guid: 218e7b4219a28604189f9cfa3c5709eb,
+        type: 2}
+      propertyPath: wallExplosion
+      value: 
+      objectReference: {fileID: 1090389133640820, guid: 5a23e5bc92c36e5468695818725a8857,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
   m_IsPrefabParent: 0

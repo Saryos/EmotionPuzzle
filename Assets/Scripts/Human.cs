@@ -24,6 +24,9 @@ public class Human : MonoBehaviour {
 
 	Scenario scenario;
 
+    private enum pointToBeAdded { BUILD, BREAK, DOG, PUSH}
+    private pointToBeAdded combinationPoint;
+
 	// must be called at initialization
 	public void setScenario(Scenario s){
 		scenario = s;
@@ -110,15 +113,24 @@ public class Human : MonoBehaviour {
 
     private bool match(char humanMood)
     {
-        if ((mood == 'S' && humanMood == 'A') ||
-            (mood == 'S' && humanMood == 'F') ||
-            (mood == 'A' && humanMood == 'J') ||
-            (mood == 'F' && humanMood == 'J') ||
-            (humanMood == 'S' && mood == 'A') ||
-            (humanMood == 'S' && mood == 'F') ||
-            (humanMood == 'A' && mood == 'J') ||
-            (humanMood == 'F' && mood == 'J'))
+        if (mood == 'S' && humanMood == 'A' || humanMood == 'S' && mood == 'A')
         {
+            combinationPoint = pointToBeAdded.BREAK;
+            return true;
+        }
+        else if (mood == 'S' && humanMood == 'F' || humanMood == 'S' && mood == 'F')
+        {
+            combinationPoint = pointToBeAdded.DOG;
+            return true;
+        }
+        else if (mood == 'J' && humanMood == 'F' || humanMood == 'J' && mood == 'F')
+        {
+            combinationPoint = pointToBeAdded.BUILD;
+            return true;
+        }
+        else if (mood == 'J' && humanMood == 'A' || humanMood == 'J' && mood == 'A')
+        {
+            combinationPoint = pointToBeAdded.PUSH;
             return true;
         }
         else
@@ -127,12 +139,29 @@ public class Human : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject == attractiveHuman)
+        if (other.gameObject == attractiveHuman)
         {
+            switch (combinationPoint)
+            {
+                case pointToBeAdded.BREAK:
+                    scenario.player.addDestroy();
+                    break;
+                case pointToBeAdded.BUILD:
+                    scenario.player.addBuild();
+                    break;
+                case pointToBeAdded.DOG:
+                    scenario.player.addBuild();
+                    break;
+                case pointToBeAdded.PUSH:
+                    scenario.player.addBuild();
+                    break;
+            }
             attracted = false;
             mood = 'B';
+            
         }
+
     }
 }
