@@ -14,12 +14,17 @@ public class Scenario : MonoBehaviour {
 
 	public int width;
 	public int height;
-	public GameObject player;
+	public GameObject playerO;
+	public PlayerController player;
+
 	// Should all objects be on the same list?
 	public List<GameObject> Walls = new List<GameObject>(); // Normal objects
 	public List<GameObject> People = new List<GameObject>(); // possible actors
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
 
+	void Start() {
+		player = playerO.GetComponent<PlayerController>();
+	}
 
 	GameObject makeObject(GameObject toadd, int i, int j){
 		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
@@ -36,20 +41,10 @@ public class Scenario : MonoBehaviour {
 		}
 		return false;
 	}
-
-	public int Destroy(int i, int j){
-		for(int k=0;k<Walls.Count;k++){
-			GameObject item = Walls [k];
-			if (isInSquare (item, i, j)) {
-				if (item.GetComponent<Cake> ()) {
-					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
-				}
-				Walls.Remove(item);
-				Destroy(item);
-				return 1;
-			}
-		}
-		return 0;
+	 
+	public void myDestroy(GameObject item){
+		Walls.Remove(item);
+		Destroy(item);
 	}
 
 	public int isPassable(int i, int j){
@@ -64,7 +59,41 @@ public class Scenario : MonoBehaviour {
 				return 0;
 			}
 		}
-		return 1;
+		foreach(GameObject item in Floors){
+			if (isInSquare (item, i, j)) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+
+	public void Act(int x, int z){
+		for(int k=0;k<Walls.Count;k++){
+			GameObject item = Walls [k];
+			if (isInSquare (item, x, z)) {
+				//Debug.Log ("Act");
+				if (item.GetComponent<Cake> ()) {
+					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
+				}
+				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
+					Debug.Log ("Weak wall destroyed");
+					player.destroys--;
+					myDestroy (item);
+				}
+			}
+		}
+		for (int k = 0; k < Floors.Count; k++) {
+			GameObject item = Floors [k];
+			if (isInSquare (item, x, z)) {
+				return; // floor ok
+				//Debug.Log ("Act");
+			}
+		}
+		if (player.builds > 0) {
+			createFloor (x, z);
+			player.builds--;
+		}
+
 	}
 
 	public void createPermaWall(int i, int j){
@@ -90,8 +119,8 @@ public class Scenario : MonoBehaviour {
 	}
 
 	public void createPlayer(int i, int j){
-		player = makeObject (playerObject, i, j);
-		(player.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
+		playerO = makeObject (playerObject, i, j);
+		(playerO.GetComponent (typeof(PlayerController)) as PlayerController).setScenario(this);
 	}
 
 	public void createFloor(int i, int j){
