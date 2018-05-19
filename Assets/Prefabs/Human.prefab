@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 23266473110565832}
   - component: {fileID: 136475969242662940}
   - component: {fileID: 114085697838247126}
+  - component: {fileID: 54486078436729472}
   m_Layer: 0
   m_Name: Human
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +86,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920806975168042}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54486078436729472
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920806975168042}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 72
+  m_CollisionDetection: 0
 --- !u!114 &114085697838247126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,6 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mood: 0
+  speed: 0.5
+  turnSpeed: 0.5
+  attractionDistance: 5
+  basicMat: {fileID: 0}
+  sadMat: {fileID: 2100000, guid: 03699c15f67b3c14999e430df6ba6517, type: 2}
+  fearMat: {fileID: 2100000, guid: 8930fb6bcebb564438ee0b43305b5f0c, type: 2}
+  joyMat: {fileID: 2100000, guid: efb455b75b4ad114cb72fa99e8e62b97, type: 2}
+  angryMat: {fileID: 0}
 --- !u!136 &136475969242662940
 CapsuleCollider:
   m_ObjectHideFlags: 1
