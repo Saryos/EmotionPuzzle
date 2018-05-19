@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Scenario : MonoBehaviour {
 
-	public GameObject wallObject;
+	public GameObject permaWallObject;
+	public GameObject weakWallObject;
 	public GameObject floorObject;
 	public GameObject humanObject;
 	public GameObject playerObject;
+	public GameObject goalObject;
+	public GameObject bridgeObject;
 
 	public int width;
 	public int height;
 	public GameObject player;
 	// Should all objects be on the same list?
-	public List<GameObject> Walls = new List<GameObject>();
-	public List<GameObject> People = new List<GameObject>();
+	public List<GameObject> Walls = new List<GameObject>(); // Normal objects
+	public List<GameObject> People = new List<GameObject>(); // possible actors
+	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
 
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -54,8 +58,13 @@ public class Scenario : MonoBehaviour {
 		return true;
 	}
 
-	public void createWall(int i, int j){
-		GameObject newWall = makeObject (wallObject, i, j);
+	public void createPermaWall(int i, int j){
+		GameObject newWall = makeObject (permaWallObject, i, j);
+		Walls.Add (newWall);
+	}
+
+	public void createWeakWall(int i, int j){
+		GameObject newWall = makeObject (weakWallObject, i, j);
 		Walls.Add (newWall);
 	}
 
@@ -66,11 +75,16 @@ public class Scenario : MonoBehaviour {
 		People.Add(newHuman);
 	}
 
+	public void createGoal(int i, int j){
+		GameObject newWall = makeObject (goalObject, i, j);
+		Walls.Add (newWall);
+	}
+
 	public void createPlayer(int i, int j){
 		player = makeObject (playerObject, i, j);
 	}
 
 	public void createFloor(int i, int j){
-		GameObject.Instantiate(floorObject, new Vector3(i,0,j), Quaternion.identity);
+		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,0,j), Quaternion.identity));
 	}
 }

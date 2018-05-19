@@ -18,10 +18,17 @@ public class ScenarioReader : MonoBehaviour{
 				bool toadda = true; // floor exists by default
 				switch (line [j]) {
 				case('.'):
+					toadda = false;
+					// chasm
+					break;
+				case('_'):
 					// just floor
 					break;
 				case('#'):
-					scenario.createWall(i, j);
+					scenario.createPermaWall(i, j);
+					break;
+				case('I'):
+					scenario.createWeakWall(i,j);
 					break;
 				case('P'):
 					scenario.createPlayer(i, j);
