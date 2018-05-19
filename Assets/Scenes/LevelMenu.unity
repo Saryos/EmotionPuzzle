@@ -285,6 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1780574040026842, guid: c76da4c8ca390244893f9767969562a4,
     type: 2}
+  lockedLevelButton: {fileID: 1956804947772904, guid: 96f0bf1060c64444a86f9a526b546748,
+    type: 2}
 --- !u!1 &1972636796
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,8 +389,8 @@ Camera:
   m_GameObject: {fileID: 2097007966}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.82058305, g: 0.9716981, b: 0.8021093, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

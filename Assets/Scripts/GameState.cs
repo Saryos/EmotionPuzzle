@@ -39,7 +39,8 @@ public class GameState : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         audiolistener = new AudioListener();
-        audiosource = new AudioSource();
+        audiosource = GetComponent<AudioSource>();
+        audiosource.Play();
 
         AllLevels = new List<int>();
         AllLevelPaths = new List<string>();
