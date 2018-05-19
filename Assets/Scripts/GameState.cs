@@ -70,7 +70,7 @@ public class GameState : MonoBehaviour
 
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     private void ActiveSceneChanged(Scene arg0, Scene arg1)
@@ -139,14 +139,14 @@ public class GameState : MonoBehaviour
 
     public void ReturnPressed()
     {
-        if (currentLevelName == "MainMenu")
+        if (currentLevelName == "MainMenuScene")
         {
             Debug.Log("Exiting game..");
             ExitGame();
         }
         else
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 }
