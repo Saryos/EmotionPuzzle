@@ -117,7 +117,7 @@ public class Scenario : MonoBehaviour {
 			}
 		}
 		if (player.builds > 0) {
-			createFloor (x, z);
+			createBridge (x, z);
 			player.builds--;
 		}
 
@@ -128,6 +128,10 @@ public class Scenario : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         justChangedEmotion = false;
     }
+
+	public void createBridge(int i, int j){
+		Floors.Add(GameObject.Instantiate(bridgeObject, new Vector3(i,-0.5f,j), Quaternion.identity));
+	}
 
 	public void createPermaWall(int i, int j){
 		GameObject newWall = makeObject (permaWallObject, i, j);

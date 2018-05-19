@@ -354,7 +354,7 @@ MonoBehaviour:
   playerObject: {fileID: 1254570596804650, guid: 534b48fe4abcb584d98796a18411fa1a,
     type: 2}
   goalObject: {fileID: 1886226423210732, guid: 1388801fab33bf744a67b43533f29942, type: 2}
-  bridgeObject: {fileID: 1946356729267526, guid: 61fbb83620ee45b42b91acaeb59d5a95,
+  bridgeObject: {fileID: 1807304407511350, guid: cb8be94fad5668844aa89bd46846fe7b,
     type: 2}
   width: 0
   height: 0
