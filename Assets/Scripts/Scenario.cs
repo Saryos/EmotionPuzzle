@@ -11,6 +11,7 @@ public class Scenario : MonoBehaviour {
 	public GameObject playerObject;
 	public GameObject goalObject;
 	public GameObject bridgeObject;
+	public GameObject wallExplosion;
 
 	public int width;
 	public int height;
@@ -31,6 +32,7 @@ public class Scenario : MonoBehaviour {
 
     void Start() {
         audioPlayer = gameObject.GetComponent<AudioSource>();
+		wallExplosion = Resources.Load ("WallExplosion") as GameObject;
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -83,6 +85,7 @@ public class Scenario : MonoBehaviour {
 					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
+					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
 					Debug.Log ("Weak wall destroyed");
                     audioPlayer.clip = breakClip;
                     audioPlayer.Play();
