@@ -25,6 +25,9 @@ public class GameState : MonoBehaviour
     public List<int> UnlockedLevels = new List<int> { 1 };
 
     private MasterScript master;
+    private AudioSource audiosource;
+    private AudioListener audiolistener;
+    public AudioClip music;
 
     void Awake()
     {
@@ -34,6 +37,9 @@ public class GameState : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        audiolistener = new AudioListener();
+        audiosource = new AudioSource();
 
         AllLevels = new List<int>();
         AllLevelPaths = new List<string>();
@@ -64,7 +70,7 @@ public class GameState : MonoBehaviour
 
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     private void ActiveSceneChanged(Scene arg0, Scene arg1)
@@ -133,14 +139,14 @@ public class GameState : MonoBehaviour
 
     public void ReturnPressed()
     {
-        if (currentLevelName == "MainMenu")
+        if (currentLevelName == "MainMenuScene")
         {
             Debug.Log("Exiting game..");
             ExitGame();
         }
         else
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 }

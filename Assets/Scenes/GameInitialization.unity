@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllLevelPaths: []
   UnlockedLevels: 01000000
+  music: {fileID: 8300000, guid: f1fbb18b74f1a12488f64490d62d41b8, type: 3}
 --- !u!4 &345886085
 Transform:
   m_ObjectHideFlags: 0

@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Break Points (Press 3):'
+  m_Text: 'Break Points:'
 --- !u!222 &107326709
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Dog Points (Press 2):
+  m_Text: 'Dog Points:
 
 '
 --- !u!222 &669504401
@@ -798,7 +798,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Bridge Points (Press 4):'
+  m_Text: 'Bridge Points:'
 --- !u!222 &1822154288
 CanvasRenderer:
   m_ObjectHideFlags: 0
