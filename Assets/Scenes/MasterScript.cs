@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MasterScript : MonoBehaviour {
 	
-	Scenario scenario = new Scenario();
+	public Scenario scenario;
 	public ScenarioReader myReader;
 	public Transform mainCamera;
 	// Use this for initialization
