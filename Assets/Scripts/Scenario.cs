@@ -22,6 +22,8 @@ public class Scenario : MonoBehaviour {
 	public List<GameObject> People = new List<GameObject>(); // possible actors
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
 
+    private bool justChangedEmotion = false;
+
 	void Start() {
 		player = playerO.GetComponent<PlayerController>();
 	}
@@ -80,9 +82,34 @@ public class Scenario : MonoBehaviour {
 					player.destroys--;
 					myDestroy (item);
 				}
-			}
+            }
 		}
-		for (int k = 0; k < Floors.Count; k++) {
+        for (int k = 0; k < People.Count; k++)
+        {
+            GameObject item = People[k];
+            if (isInSquare(item, x, z))
+            {
+                if (item.GetComponent<Human>() && justChangedEmotion == false)
+                {
+                    Debug.Log("Human Collision");
+                    if (item.GetComponent<Human>().mood != 'B' && player.emotion == 'B' )
+                    {
+                        player.emotion = item.GetComponent<Human>().mood;
+                        item.GetComponent<Human>().mood = 'B';
+                        Debug.Log("Player Got emotion" + player.emotion);
+                        StartCoroutine(emotionHasChanged());
+                    }
+                    else if (item.GetComponent<Human>().mood == 'B' && player.emotion != 'B')
+                    {
+                        item.GetComponent<Human>().mood = player.emotion;
+                        player.emotion = 'B';
+                        Debug.Log("Player used emotion" + player.emotion);
+                        StartCoroutine(emotionHasChanged());
+                    }
+                }
+            }
+        }
+        for (int k = 0; k < Floors.Count; k++) {
 			GameObject item = Floors [k];
 			if (isInSquare (item, x, z)) {
 				return; // floor ok
@@ -95,6 +122,12 @@ public class Scenario : MonoBehaviour {
 		}
 
 	}
+
+    IEnumerator emotionHasChanged() {
+        justChangedEmotion = true;
+        yield return new WaitForSeconds(0.5f);
+        justChangedEmotion = false;
+    }
 
 	public void createPermaWall(int i, int j){
 		GameObject newWall = makeObject (permaWallObject, i, j);

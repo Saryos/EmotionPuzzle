@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float turnSpeed;
 	Scenario scenario;
-	char emotion;
+	public char emotion = 'B';
 
 	// public for testing
 	public int destroys = 0;
