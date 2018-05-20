@@ -50,7 +50,7 @@ public class GameState : MonoBehaviour
         while (true)
         {
             counter++;
-            string path = string.Format("Assets/Levels/scene{0}.txt", counter);
+            string path = string.Format("Assets/Levels/testi{0}.txt", counter);
             try
             {
                 using (StreamReader r = new StreamReader(path))

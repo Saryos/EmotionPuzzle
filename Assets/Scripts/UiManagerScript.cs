@@ -5,63 +5,50 @@ using UnityEngine.UI;
 
 public class UiManagerScript : MonoBehaviour {
 
-    private Text timerText;
-    private Text runningPointsText;
-    private Text dogPointsText;
-    private Text breakPointsText;
-    private Text bridgePointsText;
+    private GameObject levelCompletedGo;
+    private Text levelCompletedText;
+    private Text pushesText;
+    private Text bonesText;
+    private Text breaksText;
+    private Text bridgesText;
 
-    private float timer;
+    public int pushes = 0;
+    public int bones = 0;
+    public int breaks = 0;
+    public int bridges = 0;
 
-    public float timeLeft = 30.0f;
-
-    public enum Actions { Run, Shield, Break, Build };
-
-    public int runningPoints = 0;
-    public int dogPoints = 0;
-    public int breakPoints = 0;
-    public int bridgePoints = 0;
+    private PlayerController player;
 
     // Use this for initialization
     void Start () {
-        timerText = GameObject.Find("TimeText").GetComponent<Text>();
-        runningPointsText = GameObject.Find("RunningPointsText").GetComponent<Text>();
-        dogPointsText = GameObject.Find("DogPointsText").GetComponent<Text>();
-        breakPointsText = GameObject.Find("BreakPointsText").GetComponent<Text>();
-        bridgePointsText = GameObject.Find("BridgePointsText").GetComponent<Text>();
+        levelCompletedGo = GameObject.Find("LevelCompleted");
+        levelCompletedText = GameObject.Find("LevelCompleted").GetComponent<Text>();
 
-        timer = 0.0f;
+        pushesText = GameObject.Find("PushesText").GetComponent<Text>();
+        bonesText = GameObject.Find("BonesText").GetComponent<Text>();
+        breaksText = GameObject.Find("BreaksText").GetComponent<Text>();
+        bridgesText = GameObject.Find("BridgesText").GetComponent<Text>();
+
+        levelCompletedGo.SetActive(false);
     }
 
     // Update is called once per frame
     void Update () {
-        timer += Time.deltaTime;
-
-        timerText.text = string.Format("TIME LEFT: {0:0.##}", timeLeft - timer);
-	}
-
-    public void PointsChanged( Actions action, bool plus )
-    {
-        int pointChange = plus ? 1 : -1;
-
-        switch (action)
+        if (player == null)
         {
-            case Actions.Run:
-                runningPoints += 1;
-                runningPointsText.text = string.Format("Running Points: {0}", runningPoints);
-                break;
-            case Actions.Shield:
-                dogPoints += 1;
-                dogPointsText.text = string.Format("Dog Points: {0}", dogPoints);
-                break;
-            case Actions.Break:
-                breakPoints += 1;
-                breakPointsText.text = string.Format("Break Points: {0}", breakPoints);
-                break;
-            case Actions.Build:
-                bridgePoints += 1;
-                bridgePointsText.text = string.Format("Bridge Points: {0}", bridgePoints);
-                break;
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
+        else
+        {
+            pushes = player.pushes;
+            bones = player.shields;
+            bridges = player.builds;
+            breaks = player.destroys;
+            pushesText.text = string.Format("Pushes: {0}", pushes);
+            bonesText.text = string.Format("Bones: {0}", bones);
+            breaksText.text = string.Format("Breaks: {0}", breaks);
+            bridgesText.text = string.Format("Bridges: {0}", bridges);
         }
     }
+    
 }
