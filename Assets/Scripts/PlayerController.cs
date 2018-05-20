@@ -77,7 +77,11 @@ public class PlayerController : MonoBehaviour {
 		if (movement != Vector3.zero) {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
 		}
-
+        
 		transform.Translate(movement * Time.deltaTime * speed, Space.World);
-	}
+
+        float step2 = speed * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, movement, step2, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDir);
+    }
 }

@@ -30,7 +30,7 @@ public class GameState : MonoBehaviour
     private AudioListener audiolistener;
     public AudioClip music;
 
-    private bool levelCompletedLock = false;
+    public bool levelCompletedLock = false;
 
     void Awake()
     {

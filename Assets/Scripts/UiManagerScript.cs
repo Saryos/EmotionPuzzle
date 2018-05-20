@@ -34,7 +34,7 @@ public class UiManagerScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
         if (GameObject.FindGameObjectWithTag("Player"))
         {
             playerFound = true;
@@ -50,6 +50,10 @@ public class UiManagerScript : MonoBehaviour {
             bonesText.text = string.Format("Bones: {0}", bones);
             breaksText.text = string.Format("Breaks: {0}", breaks);
             bridgesText.text = string.Format("Bridges: {0}", bridges);
+        }
+        if (GameState.Instance.levelCompletedLock)
+        {
+            levelCompletedGo.SetActive(true);
         }
     }
 }

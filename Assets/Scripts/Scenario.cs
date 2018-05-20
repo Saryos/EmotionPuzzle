@@ -13,7 +13,8 @@ public class Scenario : MonoBehaviour {
 	public GameObject bridgeObject;
 	public GameObject dogObject;
 	public GameObject wallExplosion;
-	GameObject waterObject;
+    public GameObject fireworks;
+    GameObject waterObject;
 	GameObject dogZoneObject;
 
 	public int width;
@@ -42,7 +43,12 @@ public class Scenario : MonoBehaviour {
 		if (!wallExplosion) {
 			Debug.Log ("Reading WallExplosion failed");
 		}
-		waterObject = Resources.Load("Water") as GameObject;
+        fireworks = Resources.Load("Fireworks") as GameObject;
+        if (!fireworks)
+        {
+            Debug.Log("Reading Fireworks failed");
+        }
+        waterObject = Resources.Load("Water") as GameObject;
 		if (!waterObject) {
 			Debug.Log ("Reading WaterObject failed");
 		}
@@ -121,6 +127,7 @@ public class Scenario : MonoBehaviour {
 				if (item.GetComponent<Cake> ()) {
 					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
 					dropFloor();
+                    Instantiate(fireworks, item.transform.position, Quaternion.identity);
                     GameState.Instance.LevelCompleted();
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
