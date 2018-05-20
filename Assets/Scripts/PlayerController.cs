@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerController : MonoBehaviour {
 
+	public float psize=0.2f;
 	public float speed;
 	public float turnSpeed;
 	Scenario scenario;
@@ -47,23 +50,23 @@ public class PlayerController : MonoBehaviour {
 //		int azx = x;
 		int azz = z;
 
-		if (moveHorizontal > 0 && transform.position.x > x) {
+		if (moveHorizontal > 0 && transform.position.x-psize > x) {
 			//Debug.Log (scenario.isPassable (x + 1, z));
 			axx++;
 			moveHorizontal *= scenario.isPassable (axx, z);
 			scenario.Act (axx,z,'E');
 		}
-		if (moveHorizontal < 0 && transform.position.x < x) {
+		if (moveHorizontal < 0 && transform.position.x+psize < x) {
 			axx--;
 			moveHorizontal *= scenario.isPassable (axx, z);
 			scenario.Act (axx,z,'W');
 		}
-		if (moveVertical < 0 && transform.position.z < z) {
+		if (moveVertical < 0 && transform.position.z+psize < z) {
 			azz--;
 			moveVertical *= scenario.isPassable (x , azz);
 			scenario.Act (x,azz,'S');
 		}
-		if (moveVertical > 0 && transform.position.z > z) {
+		if (moveVertical > 0 && transform.position.z-psize > z) {
 			azz++;
 			moveVertical *= scenario.isPassable (x , azz);
 			scenario.Act (x,azz,'N');
