@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour {
 	public int builds = 0;
 	public int shields = 0;
 
-	public void addDestroy(){
+    private GameObject animatedGo;
+    private GameObject idleGo;
+
+    public void addDestroy(){
 		destroys++;
 	}
 	public void addPush(){
@@ -36,16 +39,29 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start() {
+        animatedGo = transform.Find("Charru_Animated").gameObject;
+        idleGo = transform.Find("Charru2.2Joined").gameObject;
+        animatedGo.SetActive(false);
+    }
 
-	}
-
-	void Update() {
+    void Update() {
 		float moveHorizontal = Input.GetAxis("Horizontal");
 		float moveVertical = Input.GetAxis("Vertical");
 		int x = Mathf.RoundToInt (transform.position.x);
 		int z = Mathf.RoundToInt (transform.position.z);
 
-		int axx = x;
+        if (moveHorizontal > 0.1f || moveVertical > 0.1f || moveHorizontal < -0.1f || moveVertical < -0.1f)
+        {
+            animatedGo.SetActive(true);
+            idleGo.SetActive(false);
+        }
+        else
+        {
+            animatedGo.SetActive(false);
+            idleGo.SetActive(true);
+        }
+
+        int axx = x;
 //		int axz = z;
 //		int azx = x;
 		int azz = z;
@@ -71,16 +87,16 @@ public class PlayerController : MonoBehaviour {
 			moveVertical *= scenario.isPassable (x , azz);
 			scenario.Act (x,azz,'N');
 		}
-
+        
 		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
+        /*
 		if (movement != Vector3.zero) {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
-		}
+		}*/
         
 		transform.Translate(movement * Time.deltaTime * speed, Space.World);
 
-        float step2 = speed * Time.deltaTime;
+        float step2 = speed * Time.deltaTime * 10;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, movement, step2, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
     }

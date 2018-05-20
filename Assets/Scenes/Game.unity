@@ -504,6 +504,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1055637808048896, guid: 2297c085bcafa03448d52609c1f4abd6,
         type: 2}
+    - target: {fileID: 114340155696108784, guid: 218e7b4219a28604189f9cfa3c5709eb,
+        type: 2}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 1769466992304338, guid: c072ad3eac5478147833fa7c2ee04b7f,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114239886185098262, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
