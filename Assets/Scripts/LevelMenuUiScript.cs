@@ -10,11 +10,15 @@ public class LevelMenuUiScript : MonoBehaviour {
     public GameObject levelButton;
     public GameObject lockedLevelButton;
 
+    public GameObject placement;
+
     private GameObject canvas;
 
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+        placement = transform.Find("Placement").gameObject;
+        Vector3 pos = placement.transform.position;
         int counter = 0;
         foreach (var level in GameState.Instance.AllLevels)
         {
@@ -22,7 +26,7 @@ public class LevelMenuUiScript : MonoBehaviour {
             if (GameState.Instance.UnlockedLevels.Contains(level))
             {
                 GameObject newButtonGo = Instantiate(levelButton);
-                newButtonGo.transform.position = new Vector3(50 + counter * 75, 100, 0);
+                newButtonGo.transform.position = new Vector3(pos.x + counter * 75, pos.y, 0);
                 newButtonGo.transform.SetParent(canvas.transform);
                 newButtonGo.transform.localScale = new Vector3(1, 1, 1);
                 newButtonGo.GetComponent<Button>().onClick.AddListener(() => StartLevel(level));
@@ -31,7 +35,7 @@ public class LevelMenuUiScript : MonoBehaviour {
             else
             {
                 GameObject newButtonGo = Instantiate(lockedLevelButton);
-                newButtonGo.transform.position = new Vector3(50 + counter * 75, 100, 0);
+                newButtonGo.transform.position = new Vector3(pos.x + counter * 75, pos.y, 0);
                 newButtonGo.transform.SetParent(canvas.transform);
                 newButtonGo.transform.localScale = new Vector3(1, 1, 1);
                 newButtonGo.GetComponent<Button>().GetComponentInChildren<Text>().text = level.ToString();

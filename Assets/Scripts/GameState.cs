@@ -55,7 +55,7 @@ public class GameState : MonoBehaviour
             #if UNITY_EDITOR
             string path = string.Format("Assets/Levels/testi{0}.txt", counter);
             #elif UNITY_STANDALONE
-            string path = string.Format("EmotionPuzzle/Assets/Levels/testi{0}.txt", counter);
+            string path = string.Format("Assets/Levels/testi{0}.txt", counter);
             #else
             Application.Quit();
             #endif
