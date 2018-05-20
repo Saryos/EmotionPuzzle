@@ -100,6 +100,7 @@ public class Scenario : MonoBehaviour {
 				//Debug.Log ("Act");
 				if (item.GetComponent<Cake> ()) {
 					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
+                    GameState.Instance.LevelCompleted();
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
 					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
