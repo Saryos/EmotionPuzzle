@@ -13,9 +13,10 @@ public class Scenario : MonoBehaviour {
 	public GameObject bridgeObject;
 	public GameObject dogObject;
 	public GameObject wallExplosion;
-    GameObject waterObject;
+	GameObject waterObject;
+	GameObject dogZoneObject;
 
-    public int width;
+	public int width;
 	public int height;
 	public GameObject playerO;
 	public PlayerController player;
@@ -24,7 +25,7 @@ public class Scenario : MonoBehaviour {
 	public List<GameObject> Walls = new List<GameObject>(); // Normal objects
 	public List<GameObject> People = new List<GameObject>(); // possible actors
 	public List<GameObject> Floors = new List<GameObject>(); // floor level objects
-    public List<GameObject> Voids = new List<GameObject>(); // only graphics objects
+	public List<GameObject> Voids = new List<GameObject>(); // only graphics objects
 
     private bool justChangedEmotion = false;
     private AudioSource audioPlayer;
@@ -33,7 +34,7 @@ public class Scenario : MonoBehaviour {
     public AudioClip buildClip;
     public AudioClip speedClip;
 
-    	// Must be on awake to ensure loading before creation methods are called!
+	// Must be on awake to ensure loading before creation methods are called!
 
     void Awake() {
         audioPlayer = gameObject.GetComponent<AudioSource>();
@@ -48,6 +49,7 @@ public class Scenario : MonoBehaviour {
 		if (waterObject!=null) {
 			Debug.Log ("Reading WaterObject succeeded");
 		}
+		dogZoneObject = Resources.Load("DogZone") as GameObject;
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -98,7 +100,6 @@ public class Scenario : MonoBehaviour {
 				//Debug.Log ("Act");
 				if (item.GetComponent<Cake> ()) {
 					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
-                    GameState.Instance.LevelCompleted();
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
 					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
@@ -108,13 +109,28 @@ public class Scenario : MonoBehaviour {
 					player.destroys--;
 					myDestroy (item);
 				}
-                if (item.GetComponent<dogScript>() && player.shields > 0) {
+
+				if (item.GetComponent<dogScript>() && player.shields > 0) {
 					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
 					Debug.Log ("Doge destroyed");
 					audioPlayer.clip = breakClip;
 					audioPlayer.Play();
 					player.shields--;
 					myDestroy (item);
+				}
+
+				if (item.GetComponent<DogZoneScript>() && player.shields > 0) {
+					player.shields--;
+					dogScript doge = item.GetComponent<DogZoneScript> ().doge;
+					for(int dg=4; dg>0; dg--){
+						Instantiate (wallExplosion, doge.DogeZones[0].transform.position, Quaternion.identity);
+						Debug.Log ("Doge zone destroyed");
+						//audioPlayer.clip = breakClip;
+						//audioPlayer.Play();
+						GameObject dump = doge.DogeZones[0];
+						doge.DogeZones.Remove(dump);
+						myDestroy (dump);
+					}
 				}
             }
 		}
@@ -219,6 +235,26 @@ public class Scenario : MonoBehaviour {
 
 	public void createDog(int i, int j){
 		GameObject newWall = makeObject (dogObject, i, j);
+		dogScript temp = newWall.GetComponent<dogScript>();
+		Walls.Add (newWall);
+
+		GameObject newWallb = makeObject (dogZoneObject, i+1, j);
+		DogZoneScript abba = newWallb.GetComponent<DogZoneScript>();
+		abba.doge=temp;
+		temp.DogeZones.Add(newWallb);
+		Walls.Add (newWallb);
+
+		newWall = makeObject (dogZoneObject, i-1, j);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
+		Walls.Add (newWall);
+		newWall = makeObject (dogZoneObject, i, j+1);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
+		Walls.Add (newWall);
+		newWall = makeObject (dogZoneObject, i, j-1);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
 		Walls.Add (newWall);
 	}
 
@@ -231,7 +267,7 @@ public class Scenario : MonoBehaviour {
 	public void createFloor(int i, int j){
 		Floors.Add(GameObject.Instantiate(floorObject, new Vector3(i,-0.5f,j), Quaternion.identity));
 	}
-    public void createWater(int i, int j){
+	public void createWater(int i, int j){
 		Voids.Add(GameObject.Instantiate(waterObject, new Vector3(i,-0.5f,j), Quaternion.identity));
 	}
 }

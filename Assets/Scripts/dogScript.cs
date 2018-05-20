@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class dogScript : MonoBehaviour {
 
+	public List<GameObject> DogeZones = new List<GameObject>(); // Dummy objects for dog area
+
     // Use this for initialization
     void Start () {
 	}
