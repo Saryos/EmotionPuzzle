@@ -81,8 +81,17 @@ public class Human : MonoBehaviour {
 
     private void moveToAttraction()
     {
+        Vector3 startPos = transform.position;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, attractiveHuman.transform.position, step);
+
+        Vector3 targetDir = transform.position - startPos;
+        // The step size is equal to speed times frame time.
+        float step2 = speed * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step2, 0.0f);
+        Debug.DrawRay(transform.position, newDir, Color.red);
+        // Move our position a step closer to the target.
+        transform.rotation = Quaternion.LookRotation(newDir);
         /*
         if (movement != Vector3.zero)
         {
