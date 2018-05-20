@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -50,7 +51,14 @@ public class GameState : MonoBehaviour
         while (true)
         {
             counter++;
+
+            #if UNITY_EDITOR
             string path = string.Format("Assets/Levels/testi{0}.txt", counter);
+            #elif UNITY_STANDALONE
+            string path = string.Format("EmotionPuzzle/Assets/Levels/testi{0}.txt", counter);
+            #else
+            Application.Quit();
+            #endif
             try
             {
                 using (StreamReader r = new StreamReader(path))
@@ -59,7 +67,11 @@ public class GameState : MonoBehaviour
                     AllLevels.Add(counter);
                 }
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
+            {
+                break;
+            }
+            catch (IsolatedStorageException)
             {
                 break;
             }
