@@ -356,11 +356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab36166ebf29424c958034edcdf9eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 30
-  runningPoints: 0
-  dogPoints: 0
-  breakPoints: 0
-  bridgePoints: 0
+  pushes: 0
+  bones: 0
+  breaks: 0
+  bridges: 0
 --- !u!114 &608222318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +502,7 @@ Prefab:
         type: 2}
       propertyPath: humanObject
       value: 
-      objectReference: {fileID: 1777083622906948, guid: 926f2af0286ef1240b51a78cc8d544d7,
+      objectReference: {fileID: 1055637808048896, guid: 2297c085bcafa03448d52609c1f4abd6,
         type: 2}
     m_RemovedComponents:
     - {fileID: 114239886185098262, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}

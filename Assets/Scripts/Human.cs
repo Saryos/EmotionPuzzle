@@ -29,6 +29,9 @@ public class Human : MonoBehaviour {
     private enum pointToBeAdded { BUILD, BREAK, DOG, PUSH}
     private pointToBeAdded combinationPoint;
 
+    private GameObject animatedGo;
+    private GameObject idleGo;
+
 	// must be called at initialization
 	public void setScenario(Scenario s){
 		scenario = s;
@@ -36,6 +39,8 @@ public class Human : MonoBehaviour {
 
     void Start()
     {
+        animatedGo = transform.Find("Charru_Animated").gameObject;
+        idleGo = transform.Find("Charru2.2Joined").gameObject;
     }
 
     void Update()
@@ -50,6 +55,13 @@ public class Human : MonoBehaviour {
         if (attracted)
         {
             moveToAttraction();
+            animatedGo.SetActive(true);
+            idleGo.SetActive(false);
+        }
+        else
+        {
+            animatedGo.SetActive(false);
+            idleGo.SetActive(true);
         }
 
 
@@ -81,6 +93,7 @@ public class Human : MonoBehaviour {
 
     private void moveToAttraction()
     {
+        
         Vector3 startPos = transform.position;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, attractiveHuman.transform.position, step);
