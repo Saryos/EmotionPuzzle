@@ -14,6 +14,7 @@ public class Scenario : MonoBehaviour {
 	public GameObject dogObject;
 	public GameObject wallExplosion;
 	GameObject waterObject;
+	GameObject dogZoneObject;
 
 	public int width;
 	public int height;
@@ -48,6 +49,7 @@ public class Scenario : MonoBehaviour {
 		if (waterObject!=null) {
 			Debug.Log ("Reading WaterObject succeeded");
 		}
+		dogZoneObject = Resources.Load("DogZone") as GameObject;
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
@@ -107,6 +109,7 @@ public class Scenario : MonoBehaviour {
 					player.destroys--;
 					myDestroy (item);
 				}
+
 				if (item.GetComponent<dogScript>() && player.shields > 0) {
 					Instantiate (wallExplosion, new Vector3 (x, 0, z), Quaternion.identity);
 					Debug.Log ("Doge destroyed");
@@ -114,6 +117,20 @@ public class Scenario : MonoBehaviour {
 					audioPlayer.Play();
 					player.shields--;
 					myDestroy (item);
+				}
+
+				if (item.GetComponent<DogZoneScript>() && player.shields > 0) {
+					player.shields--;
+					dogScript doge = item.GetComponent<DogZoneScript> ().doge;
+					for(int dg=4; dg>0; dg--){
+						Instantiate (wallExplosion, doge.DogeZones[0].transform.position, Quaternion.identity);
+						Debug.Log ("Doge zone destroyed");
+						//audioPlayer.clip = breakClip;
+						//audioPlayer.Play();
+						GameObject dump = doge.DogeZones[0];
+						doge.DogeZones.Remove(dump);
+						myDestroy (dump);
+					}
 				}
             }
 		}
@@ -218,6 +235,26 @@ public class Scenario : MonoBehaviour {
 
 	public void createDog(int i, int j){
 		GameObject newWall = makeObject (dogObject, i, j);
+		dogScript temp = newWall.GetComponent<dogScript>();
+		Walls.Add (newWall);
+
+		GameObject newWallb = makeObject (dogZoneObject, i+1, j);
+		DogZoneScript abba = newWallb.GetComponent<DogZoneScript>();
+		abba.doge=temp;
+		temp.DogeZones.Add(newWallb);
+		Walls.Add (newWallb);
+
+		newWall = makeObject (dogZoneObject, i-1, j);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
+		Walls.Add (newWall);
+		newWall = makeObject (dogZoneObject, i, j+1);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
+		Walls.Add (newWall);
+		newWall = makeObject (dogZoneObject, i, j-1);
+		newWall.GetComponent<DogZoneScript>().doge=temp;
+		temp.DogeZones.Add(newWall);
 		Walls.Add (newWall);
 	}
 
