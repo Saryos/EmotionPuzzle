@@ -33,10 +33,19 @@ public class Scenario : MonoBehaviour {
     public AudioClip buildClip;
     public AudioClip speedClip;
 
-    void Start() {
+    void Awake() {
         audioPlayer = gameObject.GetComponent<AudioSource>();
 		wallExplosion = Resources.Load ("WallExplosion") as GameObject;
-		waterObject = Resources.Load ("Water") as GameObject;
+		if (!wallExplosion) {
+			Debug.Log ("Reading WallExplosion failed");
+		}
+		waterObject = Resources.Load("Water") as GameObject;
+		if (!waterObject) {
+			Debug.Log ("Reading WaterObject failed");
+		}
+		if (waterObject!=null) {
+			Debug.Log ("Reading WaterObject succeeded");
+		}
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
