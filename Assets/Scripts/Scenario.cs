@@ -33,6 +33,8 @@ public class Scenario : MonoBehaviour {
     public AudioClip buildClip;
     public AudioClip speedClip;
 
+	// Must be on awake to ensure loading before creation methods are called!
+
     void Awake() {
         audioPlayer = gameObject.GetComponent<AudioSource>();
 		wallExplosion = Resources.Load ("WallExplosion") as GameObject;
