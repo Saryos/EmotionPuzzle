@@ -29,6 +29,8 @@ public class GameState : MonoBehaviour
     private AudioListener audiolistener;
     public AudioClip music;
 
+    private bool levelCompletedLock = false;
+
     void Awake()
     {
         if (instance == null)
@@ -101,6 +103,34 @@ public class GameState : MonoBehaviour
         {
             Debug.Log("Level is not unlocked yet");
         }
+    }
+
+    public void LevelCompleted()
+    {
+        if (!levelCompletedLock)
+        {
+            levelCompletedLock = true;
+            if (AllLevels.Contains(currentLevelNumber + 1))
+            {
+                UnlockedLevels.Add(currentLevelNumber + 1);
+            }
+            else
+            {
+                // Player has won the game!
+            }
+            // Level Completed animation + Text
+            StartCoroutine(WinAnimations());
+
+        }
+    }
+
+    public IEnumerator WinAnimations()
+    {
+        // You have won!
+        yield return new WaitForSeconds(4.0f);
+        LevelMenu();
+        yield return new WaitForSeconds(0.2f);
+        levelCompletedLock = false;
     }
 
 
