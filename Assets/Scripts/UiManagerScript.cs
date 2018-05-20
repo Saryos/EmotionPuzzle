@@ -17,6 +17,7 @@ public class UiManagerScript : MonoBehaviour {
     public int breaks = 0;
     public int bridges = 0;
 
+    private bool playerFound = false;
     private PlayerController player;
 
     // Use this for initialization
@@ -34,11 +35,12 @@ public class UiManagerScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (player == null)
+        if (GameObject.FindGameObjectWithTag("Player"))
         {
+            playerFound = true;
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         }
-        else
+        if (playerFound)
         {
             pushes = player.pushes;
             bones = player.shields;
@@ -50,5 +52,4 @@ public class UiManagerScript : MonoBehaviour {
             bridgesText.text = string.Format("Bridges: {0}", bridges);
         }
     }
-    
 }
