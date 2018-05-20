@@ -6,7 +6,7 @@ using System;
 
 public class ScenarioReader : MonoBehaviour{
 
-	public bool readScenario(string filename, Scenario scenario, float creationDelay=0){
+	public bool readScenario(string filename, Scenario scenario, float creationDelay=-1){
 		StreamReader reader = new StreamReader(filename);
 		scenario.width = int.Parse(reader.ReadLine());
 		scenario.height = int.Parse(reader.ReadLine());

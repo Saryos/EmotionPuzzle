@@ -53,7 +53,9 @@ public class Scenario : MonoBehaviour {
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
-		return (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
+		GameObject creation = (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
+		creation.AddComponent<Mover>();
+		return creation;
 	}
 
 	private bool isInSquare(GameObject item, int i, int j){
