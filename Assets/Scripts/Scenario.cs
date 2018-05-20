@@ -78,6 +78,21 @@ public class Scenario : MonoBehaviour {
 		Destroy(item);
 	}
 
+	public void dropFloor(){
+		StartCoroutine (delayedDropFloor());
+	}
+
+	IEnumerator delayedDropFloor(){
+
+		for (int j = 0; j < Floors.Count; j++) {
+			float drop = Random.value;
+			int index = Mathf.RoundToInt (drop * (Floors.Count - 1));
+			yield return new WaitForSeconds(0.1f);
+			Mover forcer = Floors[index].AddComponent<Mover>();
+			forcer.destination = Floors[index].transform.position+new Vector3(0,-20,0);
+		}
+	}
+
 	public int isPassable(int i, int j){
 		foreach(GameObject item in Walls){
 			if (isInSquare (item, i, j)) {
@@ -105,6 +120,7 @@ public class Scenario : MonoBehaviour {
 				//Debug.Log ("Act");
 				if (item.GetComponent<Cake> ()) {
 					Debug.Log ("You grabbed the cake, you naughty cake grabber!");
+					dropFloor();
                     GameState.Instance.LevelCompleted();
 				}
 				if (item.GetComponent<WeakWall>() && player.destroys > 0) {
