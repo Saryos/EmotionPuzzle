@@ -183,7 +183,7 @@ public class Scenario : MonoBehaviour {
 					if(isPassable(x_, z_)==1){
 						item.transform.position=new Vector3(x_, 0, z_);
 					}
-				} else if (player.pushes > 0) {
+				} else if (player.pushes > 0 && justChangedEmotion == false) {
 					player.pushes--;
 					item.GetComponent<Human> ().moveUnlocked=true;
 				}
