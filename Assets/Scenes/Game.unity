@@ -366,7 +366,8 @@ Prefab:
       value: 
       objectReference: {fileID: 1777083622906948, guid: 926f2af0286ef1240b51a78cc8d544d7,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114239886185098262, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &662212561
