@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114150946718442814}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   turnSpeed: 0
+  emotion: 66
   destroys: 0
+  pushes: 0
+  builds: 0
+  shields: 0
 --- !u!136 &136705915266491222
 CapsuleCollider:
   m_ObjectHideFlags: 1
