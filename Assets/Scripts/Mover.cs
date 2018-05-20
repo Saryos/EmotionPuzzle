@@ -10,8 +10,8 @@ public class Mover : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Debug.Log ("mover created");
-		destination = transform.position;
-		transform.position = transform.position + new Vector3 (5f, 3, 2f);
+		//destination = transform.position;
+		//transform.position = transform.position + new Vector3 (5f, 3, 2f);
 	}
 	
 	// Update is called once per frame

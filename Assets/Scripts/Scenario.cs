@@ -53,8 +53,11 @@ public class Scenario : MonoBehaviour {
     }
 
 	GameObject makeObject(GameObject toadd, int i, int j){
-		GameObject creation = (GameObject)Instantiate (toadd, new Vector3 (i, 0, j), Quaternion.identity);
-		creation.AddComponent<Mover>();
+		Vector3 destination = new Vector3 (i, 0, j);
+		Vector3 start = new Vector3 (5f, 3, 2f);
+		GameObject creation = (GameObject)Instantiate (toadd, destination+start , Quaternion.identity);
+		Mover forcer = creation.AddComponent<Mover>();
+		forcer.destination = destination;
 		return creation;
 	}
 
