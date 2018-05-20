@@ -329,7 +329,7 @@ Prefab:
         type: 2}
       propertyPath: humanObject
       value: 
-      objectReference: {fileID: 1063247301687066, guid: 46b103a4b927f434ab874d5459e1bcdf,
+      objectReference: {fileID: 1055637808048896, guid: 2297c085bcafa03448d52609c1f4abd6,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 218e7b4219a28604189f9cfa3c5709eb, type: 2}

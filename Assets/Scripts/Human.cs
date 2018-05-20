@@ -26,7 +26,7 @@ public class Human : MonoBehaviour {
 
 	Scenario scenario;
 
-    private enum pointToBeAdded { BUILD, BREAK, DOG, PUSH}
+    private enum pointToBeAdded { BUILD, BREAK, DOG, PUSH, NONE}
     private pointToBeAdded combinationPoint;
 
     private GameObject animatedGo;
@@ -137,26 +137,43 @@ public class Human : MonoBehaviour {
 
     private bool match(char humanMood)
     {
-        if (mood == 'S' && humanMood == 'A' || humanMood == 'S' && mood == 'A')
+		combinationPoint = pointToBeAdded.NONE;
+        if (mood == 'S' && humanMood == 'A' )
         {
             combinationPoint = pointToBeAdded.BREAK;
             return true;
         }
-        else if (mood == 'S' && humanMood == 'F' || humanMood == 'S' && mood == 'F')
+        else if (mood == 'S' && humanMood == 'F')
         {
             combinationPoint = pointToBeAdded.DOG;
             return true;
         }
-        else if (mood == 'J' && humanMood == 'F' || humanMood == 'J' && mood == 'F')
+        else if (mood == 'J' && humanMood == 'F')
         {
             combinationPoint = pointToBeAdded.BUILD;
             return true;
         }
-        else if (mood == 'J' && humanMood == 'A' || humanMood == 'J' && mood == 'A')
+        else if (mood == 'J' && humanMood == 'A')
         {
             combinationPoint = pointToBeAdded.PUSH;
             return true;
-        }
+		}
+		else if (mood == 'A' && humanMood == 'S' )
+		{
+			return true;
+		}
+		else if (mood == 'F' && humanMood == 'S')
+		{
+			return true;
+		}
+		else if (mood == 'F' && humanMood == 'J')
+		{
+			return true;
+		}
+		else if (mood == 'A' && humanMood == 'J')
+		{
+			return true;
+		}
         else
         {
             return false;
@@ -176,10 +193,10 @@ public class Human : MonoBehaviour {
                     scenario.player.addBuild();
                     break;
                 case pointToBeAdded.DOG:
-                    scenario.player.addBuild();
+					scenario.player.addShield();
                     break;
                 case pointToBeAdded.PUSH:
-                    scenario.player.addBuild();
+                    scenario.player.addPush();
                     break;
             }
             attracted = false;
